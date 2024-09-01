@@ -1,6 +1,6 @@
 {
-  "name": "mongoose-lean-defaults",
-  "version": "2.2.1",
+  "name": "new-mongoose-lean-defaults",
+  "version": "3.0.1",
   "description": "Attach defaults to the results of mongoose queries when using `.lean()`",
   "main": "index.js",
   "types": "index.d.ts",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/douglasgabr/mongoose-lean-defaults.git"
+    "url": "git+https://github.com/jose-cabral/mongoose-lean-defaults.git"
   },
   "keywords": [
     "mongoose",
@@ -19,12 +19,15 @@
     "defaults",
     "mongodb"
   ],
-  "author": "Douglas Francisco Gabriel <douglasgabriel99@gmail.com>",
+  "contributors": [
+    "Douglas Francisco Gabriel",
+    "José Cabral"
+  ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/douglasgabr/mongoose-lean-defaults/issues"
+    "url": "https://github.com/jose-cabral/mongoose-lean-defaults/issues"
   },
-  "homepage": "https://github.com/douglasgabr/mongoose-lean-defaults#readme",
+  "homepage": "https://github.com/jose-cabral/mongoose-lean-defaults#readme",
   "dependencies": {
     "mpath": "^0.9.0"
   },

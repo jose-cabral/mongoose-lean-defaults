@@ -28,14 +28,14 @@ const MySchema = new mongoose.Schema(
     },
   },
   {
-    collection: 'issues_30',
+    collection: 'issues_32',
   },
 );
 
 MySchema.plugin(mongooseLeanDefaults, { defaults: true });
 
-// https://github.com/DouglasGabr/mongoose-lean-defaults/issues/30
-describe('Issue #30', () => {
+// 30.spec.ts
+describe('Issue #32', () => {
   let MyModel: mongoose.Model<MySchema>;
 
   beforeAll(async () => {
@@ -51,7 +51,7 @@ describe('Issue #30', () => {
     await mongoose.disconnect();
   });
 
-  it('should respect undefined default on subschema', async () => {
+  it('should respect undefined default on sub-schema', async () => {
     await MyModel.collection.insertOne({});
     const result = await MyModel.findOne({}).lean().exec();
     expect(result?.sub).toBeUndefined();

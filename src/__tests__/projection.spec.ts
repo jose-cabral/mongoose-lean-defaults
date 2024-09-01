@@ -1,83 +1,62 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import mongooseLeanDefaults from '..';
 
+interface IChild {
+  first_name: string;
+  last_name: string;
+}
+
 interface IProjection {
-  a: string;
-  b: {
-    a: string;
-    b: string;
+  name: string;
+  child1: IChild;
+  children1: {
+    child1: IChild;
+    child2: IChild;
   };
-  c: {
-    a: {
-      a: string;
-      b: string;
-    };
-    b: {
-      a: string;
-      b: string;
-    };
+  child2: IChild;
+  children2: {
+    child1: IChild;
+    child2: IChild;
   };
-
-  childA: {
-    a: string;
-    b: string;
-  };
-  childB: {
-    a: {
-      a: string;
-      b: string;
-    };
-    b: {
-      a: string;
-      b: string;
-    };
-  };
-
-  subChildA: Array<{
-    a: {
-      a: string;
-      b: string;
-    };
-    b: {
-      a: string;
-      b: string;
-    };
+  grandchildren: Array<{
+    child1: IChild;
+    child2: IChild;
   }>;
 }
 
 const childSchema = new Schema({
-  a: { type: String, default: 'a' },
-  b: { type: String, default: 'b' },
+  first_name: { type: String, default: 'child first name' },
+  last_name: { type: String, default: 'child last name' },
 });
 
-const subChildSchema = new Schema({
-  a: childSchema,
-  b: childSchema,
+const childrenSchema = new Schema({
+  child1: childSchema,
+  child2: childSchema,
 });
 
 const schema = new Schema<IProjection>(
   {
-    a: { type: String, default: 'a' },
-    b: {
-      a: { type: String, default: 'a' },
-      b: { type: String, default: 'b' },
+    name: { type: String, default: 'parent name' },
+    child1: {
+      first_name: { type: String, default: 'child first name' },
+      last_name: { type: String, default: 'child last name' },
     },
-    c: {
-      a: {
-        a: { type: String, default: 'a' },
-        b: { type: String, default: 'b' },
+    children1: {
+      child1: {
+        first_name: { type: String, default: 'child first name' },
+        last_name: { type: String, default: 'child last name' },
       },
-      b: {
-        a: { type: String, default: 'a' },
-        b: { type: String, default: 'b' },
+      child2: {
+        first_name: { type: String, default: 'child first name' },
+        last_name: { type: String, default: 'child last name' },
       },
     },
-    childA: childSchema,
-    childB: {
-      a: childSchema,
-      b: childSchema,
+    child2: childSchema,
+    children2: {
+      child1: childSchema,
+      child2: childSchema,
     },
-    subChildA: [subChildSchema],
+    grandchildren: [childrenSchema],
   },
   { collection: 'projection' },
 );
@@ -88,6 +67,7 @@ const { MONGO_URI = 'mongodb://localhost:27017/mongooseLeanDefaults' } =
   process.env;
 describe('projections', () => {
   let MyModel: Model<IProjection>;
+
   beforeAll(async () => {
     await mongoose.connect(MONGO_URI);
     MyModel = mongoose.model('Projection', schema);
@@ -104,43 +84,37 @@ describe('projections', () => {
   it('should respect projections', async () => {
     // arrange
     await MyModel.collection.insertOne({
-      subChildA: [
+      grandchildren: [
         {
-          b: { b: 'b' },
+          child2: { last_name: 'child last name' },
         },
       ],
     });
     // act
     const result = (await MyModel.findOne({})
       .select({
-        a: 1,
-        b: 1,
-        'c.a': 1,
-        'c.b.a': 1,
-        childA: 1,
-        'childB.a': 1,
-        'childB.b.a': 1,
-        'subChildA.a': 1,
-        'subChildA.b.a': 1,
+        name: 1,
+        child1: 1,
+        'children1.child1': 1,
+        'children1.child2.first_name': 1,
+        child2: 1,
+        'children2.child1': 1,
+        'children2.child2.first_name': 1,
+        'grandchildren.child1': 1,
+        'grandchildren.child2.first_name': 1,
       })
       .lean({ defaults: true })
       .exec())!;
     // assert
-    expect(result.a).toEqual('a');
-    expect(result.b).toEqual(expect.objectContaining({ a: 'a', b: 'b' }));
-    expect(result.c.a).toEqual(expect.objectContaining({ a: 'a', b: 'b' }));
-    expect(result.c.b.a).toEqual('a');
-    expect(result.c.b.b).toBeUndefined();
-    expect(result.childA).toEqual(expect.objectContaining({ a: 'a', b: 'b' }));
-    expect(result.childB.a).toEqual(
-      expect.objectContaining({ a: 'a', b: 'b' }),
-    );
-    expect(result.childB.b.a).toEqual('a');
-    expect(result.childB.b.b).toBeUndefined();
-    expect(result.subChildA[0].a).toEqual(
-      expect.objectContaining({ a: 'a', b: 'b' }),
-    );
-    expect(result.subChildA[0].b.a).toEqual('a');
-    expect(result.subChildA[0].b.b).toBeUndefined();
+    expect(result.name).toEqual('parent name');
+    expect(result.child1).toEqual(expect.objectContaining({ first_name: 'child first name', last_name: 'child last name' }));
+    expect(result.children1.child1).toEqual(expect.objectContaining({ first_name: 'child first name', last_name: 'child last name' }));
+    expect(result.children1.child2.first_name).toEqual('child first name');
+    expect(result.children1.child2.last_name).toBeUndefined();
+    expect(result.child2).toBeUndefined();
+    expect(result.children2).toBeUndefined();
+    expect(result.grandchildren[0].child1).toBeUndefined();
+    expect(result.grandchildren[0].child2.first_name).toEqual('child first name');
+    expect(result.grandchildren[0].child2.last_name).toBeUndefined();
   });
 });
