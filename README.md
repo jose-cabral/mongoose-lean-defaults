@@ -6,7 +6,7 @@ Attach defaults to the results of mongoose queries when using [`.lean()`](https:
 
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jose-cabral/mongoose-lean-defaults/.github%2Fworkflows%2Frun-tests.yml?branch=main&label=tests)
-![GitHub Release](https://img.shields.io/github/v/release/jose-cabral/mongoose-lean-defaults)
+![GitHub Release](https://img.shields.io/github/v/release/jose-cabral/mongoose-lean-defaults?link=https%3A%2F%2Fgithub.com%2Fjose-cabral%2Fmongoose-lean-defaults%2Freleases)
 
 ## Changelog
 
