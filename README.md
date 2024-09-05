@@ -5,8 +5,9 @@ Forked from [mongoose-lean-defaults](https://github.com/douglasgabr/mongoose-lea
 Attach defaults to the results of mongoose queries when using [`.lean()`](https://mongoosejs.com/docs/api.html#query_Query-lean).
 
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jose-cabral/mongoose-lean-defaults/.github%2Fworkflows%2Frun-tests.yml?branch=main&label=tests)
-![GitHub Release](https://img.shields.io/github/v/release/jose-cabral/mongoose-lean-defaults?link=https%3A%2F%2Fgithub.com%2Fjose-cabral%2Fmongoose-lean-defaults%2Freleases)
+
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jose-cabral/mongoose-lean-defaults/.github%2Fworkflows%2Frun-tests.yml?branch=main&label=tests&logo=github)](https://github.com/jose-cabral/mongoose-lean-defaults/actions?query=workflow%3Arun-tests)
+[![GitHub release](https://img.shields.io/github/release/jose-cabral/mongoose-lean-defaults.svg?style=flat-square)](https://github.com/jose-cabral/mongoose-lean-defaults/releases/latest)
 
 ## Changelog
 
