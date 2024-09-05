@@ -1,9 +1,11 @@
 # new-mongoose-lean-defaults
 
-Forked from [mongoose-lean-defaults](https://github.com/douglasgabr/mongoose-lean-defaults) because that repo is stalled.
+_This a fork of the original [mongoose-lean-defaults](https://github.com/douglasgabr/mongoose-lean-defaults) project.
+Due to the project's current inactivity, this fork has been created to address the current issues._
+
+---
 
 Attach defaults to the results of mongoose queries when using [`.lean()`](https://mongoosejs.com/docs/api.html#query_Query-lean).
-
 
 
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jose-cabral/mongoose-lean-defaults/.github%2Fworkflows%2Frun-tests.yml?branch=main&label=tests&logo=github)](https://github.com/jose-cabral/mongoose-lean-defaults/actions?query=workflow%3Arun-tests)
