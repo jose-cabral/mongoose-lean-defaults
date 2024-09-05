@@ -1,13 +1,21 @@
 # new-mongoose-lean-defaults
 
+Forked from [mongoose-lean-defaults](https://github.com/douglasgabr/mongoose-lean-defaults) because that repo is stalled.
+
 Attach defaults to the results of mongoose queries when using [`.lean()`](https://mongoosejs.com/docs/api.html#query_Query-lean).
 
-Highly inspired by [mongoose-lean-virtuals](https://github.com/vkarpov15/mongoose-lean-virtuals).
 
-Fork of [mongoose-lean-defaults](https://github.com/douglasgabr/mongoose-lean-defaults).
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jose-cabral/mongoose-lean-defaults/.github%2Fworkflows%2Frun-tests.yml?branch=main&label=tests)
+![GitHub Release](https://img.shields.io/github/v/release/jose-cabral/mongoose-lean-defaults)
 
-[![Run Tests](https://github.com/jose-cabral/mongoose-lean-defaults/actions/workflows/run-tests.yml/badge.svg?branch=main&event=push)](https://github.com/jose-cabral/mongoose-lean-defaults/actions/workflows/run-tests.yml)
-[![Node.js Package](https://github.com/jose-cabral/mongoose-lean-defaults/actions/workflows/publish-to-npm.yml/badge.svg?branch=main&event=release)](https://github.com/jose-cabral/mongoose-lean-defaults/actions/workflows/npmpublish.yml)
+## Changelog
+
+### 3.0.4
+
+🪲 **bugfixes**
+
+* `defaults` were being applied to sub-schemas even if they were `not required` and not set
+    * this resulted it non required fields to be set because of nested `defaults`
 
 ## Install
 
