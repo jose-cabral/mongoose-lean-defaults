@@ -13,7 +13,7 @@ Attach defaults to the results of mongoose queries when using [`.lean()`](https:
 
 ## Changelog
 
-### 3.0.4
+### 3.0.5
 
 🪲 **bugfixes**
 
